@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Es & Thijs Campervacay 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+
+<!-- ╔══════════════════════════════════════════════════════════╗
+     ║  FIREBASE SETUP — vul hieronder jouw eigen config in   ║
+     ║  1. Ga naar https://console.firebase.google.com        ║
+     ║  2. Maak een nieuw project aan (gratis)                ║
+     ║  3. Klik op "Web app toevoegen" (</>)                  ║
+     ║  4. Kopieer de firebaseConfig en plak die hieronder    ║
+     ║  5. Ga naar Realtime Database → Regels → zet op:       ║
+     ║     { "rules": { ".read": true, ".write": true } }     ║
+     ╚══════════════════════════════════════════════════════════╝ -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyC3HWZI9fiVXlq5Bb7fd8rHBtSX_by80Co",
+    authDomain: "camper-9d6e9.firebaseapp.com",
+    databaseURL: "https://camper-9d6e9-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "camper-9d6e9",
+    storageBucket: "camper-9d6e9.firebasestorage.app",
+    messagingSenderId: "10688987504",
+    appId: "1:10688987504:web:954e7d9c5ab2d310e28fb5",
+    measurementId: "G-FF9CLF47H0"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const DATA_REF = "campervacay2026";
+
+  window._fbSave = async (data) => {
+    await set(ref(db, DATA_REF), data);
+  };
+
+  window._fbListen = (callback) => {
+    onValue(ref(db, DATA_REF), (snapshot) => {
+      if (snapshot.exists()) callback(snapshot.val());
+    });
+  };
+</script>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a;max-width:480px;margin:0 auto;min-height:100vh}
+.page{display:none}.page.on{display:block}
+
+/* HEADER */
+.site-header{background:#fff;border-bottom:1px solid #f0ede8;padding:13px 18px;position:sticky;top:0;z-index:200}
+.header-inner{display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Playfair Display',serif;font-size:15px;font-weight:900;line-height:1.2}
+.logo em{color:#c8714a;font-style:normal}
+.logo-sub{font-size:9px;color:#bbb;letter-spacing:1.4px;text-transform:uppercase;display:block;margin-top:1px}
+.nav-bar{display:flex;gap:1px;position:relative;z-index:300}
+.nav-item{position:relative}
+.nav-label{font-size:11px;font-weight:500;color:#666;padding:6px 9px;border-radius:6px;cursor:pointer;white-space:nowrap;user-select:none;transition:all .15s}
+.nav-label:hover,.nav-item.open .nav-label{background:#f5f1ea;color:#1a1a1a}
+.dropdown{display:none;position:absolute;top:calc(100% + 6px);right:0;min-width:168px;background:#fff;border:1px solid #f0ede8;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.15);overflow:hidden;z-index:500}
+.nav-item.open .dropdown{display:block}
+.dd-item{padding:10px 14px;font-size:12px;cursor:pointer;color:#333;border-bottom:1px solid #faf8f5;display:flex;align-items:center;gap:8px;transition:background .12s}
+.dd-item:last-child{border-bottom:none}
+.dd-item:hover{background:#fef8f4;color:#c8714a}
+
+/* HERO */
+.hero{position:relative;height:270px;overflow:hidden}
+.hero-bg{width:100%;height:100%;object-fit:cover;display:block}
+.hero-fallback{width:100%;height:100%;background:linear-gradient(160deg,#1a3a5c 0%,#2e6b8a 40%,#4a9068 100%);display:flex;align-items:center;justify-content:center;font-size:64px}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,rgba(0,0,0,.1) 60%)}
+.hero-body{position:absolute;bottom:0;left:0;right:0;padding:24px 20px}
+.hero-eye{font-size:9.5px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:8px}
+.hero-title{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:#fff;line-height:1.05;margin-bottom:5px}
+.hero-sub{font-size:12px;color:rgba(255,255,255,.7)}
+
+/* STOP CARDS */
+.stops-section{padding:20px 16px 32px}
+.stop-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.scard{border-radius:14px;overflow:hidden;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.08);transition:transform .2s,box-shadow .2s}
+.scard:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.14)}
+.sc-hero{position:relative;height:110px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.sc-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.sc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,rgba(0,0,0,.05) 70%);z-index:2}
+.sc-emoji{font-size:32px;position:relative;z-index:3;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))}
+.sc-flag{position:absolute;top:7px;right:7px;font-size:14px;z-index:3}
+.sc-nights{position:absolute;bottom:6px;left:8px;font-size:8.5px;color:rgba(255,255,255,.9);z-index:3}
+.sc-body{padding:9px 10px 12px;background:#fff}
+.sc-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;line-height:1.2}
+.sc-dates{font-size:9.5px;color:#bbb;margin-top:1px}
+.sc-camp{font-size:9px;color:#7a9db5;margin-top:4px;line-height:1.3}
+.sc-badge{display:inline-block;margin-top:5px;font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;background:#fef0e8;color:#b85c30}
+.sc-badge.e{background:#f5f2ed;color:#bbb}
+
+/* Destination gradients (fallback als geen foto) */
+.g-maastricht{background:linear-gradient(135deg,#4a1e6e,#8a4aad)}
+.g-munchen{background:linear-gradient(135deg,#0d3d6b,#2877b8)}
+.g-ljubljana{background:linear-gradient(135deg,#1a5c3a,#3a9e6a)}
+.g-istrie{background:linear-gradient(135deg,#0d5c7a,#1a9ec8)}
+.g-brda-saxida{background:linear-gradient(135deg,#5c3a7a,#9a6ab8)}
+.g-brda-kamp{background:linear-gradient(135deg,#6b1a3a,#b84a7a)}
+.g-bovec{background:linear-gradient(135deg,#1a4a5c,#2a7a9a)}
+.g-zwartewoud{background:linear-gradient(135deg,#1a3a1a,#3a6a3a)}
+.g-trier{background:linear-gradient(135deg,#5c2e1a,#a05a30)}
+.g-utrecht{background:linear-gradient(135deg,#1a3a6b,#2a6ab8)}
+
+/* DETAIL PAGE */
+.det-hero{position:relative;height:280px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.det-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.det-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.2) 60%);z-index:2}
+.det-emoji{font-size:60px;position:relative;z-index:3;filter:drop-shadow(0 4px 8px rgba(0,0,0,.5))}
+.det-body{position:absolute;bottom:0;left:0;right:0;padding:20px 18px;z-index:4}
+.back-btn{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.24);color:#fff;padding:6px 12px;border-radius:20px;cursor:pointer;font-size:11px;font-family:'Inter',sans-serif;margin-bottom:10px;transition:background .15s}
+.back-btn:hover{background:rgba(255,255,255,.3)}
+.det-name{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:#fff;line-height:1.1}
+.det-sub{font-size:11px;color:rgba(255,255,255,.68);margin-top:3px}
+.det-camp-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.17);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:4px 11px;font-size:10px;color:#fff;margin-top:8px}
+
+/* CAMPING CARD */
+.camp-card{margin:16px;background:#f9f7f3;border-radius:14px;padding:15px;border:1px solid #ede9e2}
+.cc-lbl{font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:#bbb;font-weight:600;margin-bottom:9px}
+.cc-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#1a1a1a}
+.cc-addr{font-size:12px;color:#7a9db5;margin-top:3px;line-height:1.6}
+.cc-geo{display:inline-flex;align-items:center;gap:4px;background:#edf5f0;color:#2e7a5b;font-size:10px;padding:3px 9px;border-radius:8px;margin-top:7px}
+.cc-edit{background:none;border:1px solid #e8e4de;border-radius:8px;padding:5px 12px;font-size:11px;color:#999;cursor:pointer;font-family:'Inter',sans-serif;margin-top:9px;display:inline-block}
+.cc-edit:hover{background:#fff}
+.ei-lbl{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#bbb;display:block;margin-bottom:4px;font-weight:600}
+.ei{width:100%;border:1.5px solid #e8e4de;border-radius:10px;padding:9px 12px;font-size:13px;font-family:'Inter',sans-serif;background:#fff;outline:none;color:#1a1a1a;margin-bottom:8px;transition:border-color .2s}
+.ei:focus{border-color:#c8714a}
+.ei-row{display:flex;gap:8px;align-items:center}
+.ei-row .ei{margin-bottom:0;flex:1}
+.ei-save{background:#1a1a1a;color:#fff;border:none;border-radius:10px;padding:9px 16px;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap}
+.ei-cancel{font-size:11px;color:#bbb;cursor:pointer;margin-top:8px;display:inline-block}
+
+/* CATEGORY TABS */
+.cat-sec{padding:0 16px;margin-top:16px}
+.cat-scroll{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.cat-scroll::-webkit-scrollbar{display:none}
+.ctab{display:flex;align-items:center;gap:4px;padding:8px 14px;border-radius:25px;border:1.5px solid #ede9e2;background:#fff;cursor:pointer;white-space:nowrap;font-size:11.5px;font-weight:500;font-family:'Inter',sans-serif;transition:all .15s;color:#666}
+.ctab.on{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.cn{background:#c8714a;color:#fff;border-radius:10px;padding:1px 6px;font-size:9px;margin-left:1px}
+
+/* ITEMS */
+.items-sec{padding:14px 16px 18px}
+.icard{background:#fff;border-radius:13px;padding:15px;margin-bottom:10px;border:1px solid #f0ede8;border-left:3px solid;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.ic-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.ic-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;line-height:1.2;flex:1;color:#1a1a1a}
+.ic-del{background:none;border:none;cursor:pointer;color:#ddd;font-size:12px;padding:2px 4px;flex-shrink:0}
+.ic-del:hover{color:#c0392b}
+.ic-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;align-items:center}
+.ic-addr{font-size:11px;color:#bbb}
+.ic-dist{background:#edf5f0;color:#2e6e4e;font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:8px}
+.ic-note{font-size:12px;color:#666;margin-top:7px;font-style:italic;line-height:1.6;padding-left:10px;border-left:2px solid #f0ede8}
+.ic-when{font-size:10px;color:#ddd;margin-top:6px}
+.empty-box{text-align:center;padding:40px 20px}
+.eb-ico{font-size:30px;display:block;margin-bottom:10px}
+.eb-txt{font-size:13px;color:#bbb;line-height:1.7}
+
+/* ADD BUTTON */
+.add-wrap{padding:0 16px 24px}
+.add-btn{width:100%;background:#c8714a;color:#fff;border:none;border-radius:13px;padding:15px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:opacity .18s;letter-spacing:.1px}
+.add-btn:hover{opacity:.88}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:600;display:none;align-items:flex-end;justify-content:center}
+.modal-bg.on{display:flex}
+.modal{background:#fff;border-radius:20px 20px 0 0;padding:24px 20px 40px;width:100%;max-width:480px}
+.m-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:16px;color:#1a1a1a}
+.m-cats{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+.mc{padding:6px 12px;border-radius:20px;border:1.5px solid #ede9e2;font-size:11px;cursor:pointer;font-family:'Inter',sans-serif;color:#666;transition:all .15s}
+.mc.on{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.fl{margin-bottom:13px}
+.fl label{font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:#bbb;display:block;margin-bottom:5px;font-weight:600}
+.fl input,.fl textarea{width:100%;border:1.5px solid #e8e4de;border-radius:10px;padding:10px 13px;font-size:14px;font-family:'Inter',sans-serif;background:#fafaf8;outline:none;color:#1a1a1a;transition:border-color .2s}
+.fl input:focus,.fl textarea:focus{border-color:#c8714a;background:#fff}
+.fl textarea{resize:vertical;min-height:60px}
+.m-btns{display:flex;gap:10px;margin-top:8px}
+.m-save{flex:1;background:#1a1a1a;color:#fff;border:none;border-radius:12px;padding:14px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:opacity .15s}
+.m-save:disabled{opacity:.45}
+.m-cancel{background:none;border:1.5px solid #e8e4de;color:#999;border-radius:12px;padding:14px 16px;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;font-size:12px;padding:10px 20px;border-radius:25px;z-index:700;opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap;font-weight:500}
+.toast.on{opacity:1}
+
+/* SYNC INDICATOR */
+.sync-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#bbb;margin-left:6px;vertical-align:middle;transition:background .3s}
+.sync-dot.live{background:#2e7a5b}
+
+/* SETUP SCREEN */
+.setup-screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center}
+.setup-screen h2{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:#1a1a1a;margin-bottom:12px}
+.setup-screen p{font-size:13px;color:#888;line-height:1.7;margin-bottom:8px}
+.setup-screen code{background:#f5f2ed;padding:3px 8px;border-radius:6px;font-size:12px;color:#c8714a}
+.setup-screen a{color:#c8714a;text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+
+<!-- SETUP SCHERM (verdwijnt als Firebase geconfigureerd is) -->
+<div id="setup-screen" class="setup-screen" style="display:none">
+  <div style="font-size:48px;margin-bottom:16px">🚐</div>
+  <h2>Firebase instellen</h2>
+  <p>Open dit bestand in een tekstverwerker en vervang de Firebase config bovenaan het bestand.</p>
+  <p>Stap 1: ga naar <a href="https://console.firebase.google.com" target="_blank">console.firebase.google.com</a></p>
+  <p>Stap 2: maak een nieuw project aan (gratis)</p>
+  <p>Stap 3: voeg een web app toe <code>&lt;/&gt;</code></p>
+  <p>Stap 4: kopieer de <code>firebaseConfig</code> en plak in dit bestand</p>
+  <p>Stap 5: zet Realtime Database regels op publiek</p>
+  <p style="margin-top:16px;font-size:12px;color:#bbb">Daarna werkt de app volledig gedeeld voor jullie allebei ✓</p>
+</div>
+
+<!-- OVERZICHT PAGINA -->
+<div class="page on" id="p-ov">
+  <div class="site-header">
+    <div class="header-inner">
+      <div>
+        <div class="logo"><em>Es</em> &amp; Thijs <span class="sync-dot" id="sync-dot" title="Live sync"></span></div>
+        <span class="logo-sub">Campervacay 2026</span>
+      </div>
+      <nav class="nav-bar" id="nav-bar">
+        <div class="nav-item" data-ids="maastricht,utrecht">
+          <div class="nav-label">Nederland ▾</div>
+          <div class="dropdown"></div>
+        </div>
+        <div class="nav-item" data-ids="munchen,zwartewoud,trier">
+          <div class="nav-label">Duitsland ▾</div>
+          <div class="dropdown"></div>
+        </div>
+        <div class="nav-item" data-ids="ljubljana,brda-saxida,brda-kamp,bovec">
+          <div class="nav-label">Slovenië ▾</div>
+          <div class="dropdown"></div>
+        </div>
+        <div class="nav-item" data-ids="istrie">
+          <div class="nav-label">Kroatië ▾</div>
+          <div class="dropdown"></div>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <div class="hero" id="main-hero">
+    <div class="hero-fallback">🏔️</div>
+    <div class="hero-ov"></div>
+    <div class="hero-body">
+      <div class="hero-eye">Zomer 2026 · 23 dagen</div>
+      <div class="hero-title">Es &amp; Thijs<br/>Campervacay</div>
+      <div class="hero-sub">10 bestemmingen · 4 landen</div>
+    </div>
+  </div>
+
+  <div class="stops-section">
+    <div class="stop-grid" id="stop-grid"></div>
+  </div>
+</div>
+
+<!-- DETAIL PAGINA -->
+<div class="page" id="p-det">
+  <div class="det-hero" id="det-hero">
+    <div class="det-ov"></div>
+    <div class="det-emoji" id="d-emoji"></div>
+    <div class="det-body">
+      <button class="back-btn" onclick="goBack()">← Terug</button>
+      <div class="det-name" id="d-name"></div>
+      <div class="det-sub" id="d-dates"></div>
+      <div class="det-camp-tag" id="d-camp"></div>
+    </div>
+  </div>
+
+  <div class="camp-card" id="camp-card"></div>
+
+  <div class="cat-sec">
+    <div class="cat-scroll" id="cat-row"></div>
+  </div>
+
+  <div class="items-sec" id="item-list"></div>
+
+  <div class="add-wrap">
+    <button class="add-btn" onclick="openModal()">+ Idee toevoegen</button>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modal-bg" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div class="m-title">Nieuw idee ✨</div>
+    <div class="m-cats" id="mcats"></div>
+    <div class="fl"><label>Naam *</label><input id="f-name" placeholder="Bijv. Trattoria al Ponte…"/></div>
+    <div class="fl"><label>Adres (voor afstand)</label><input id="f-addr" placeholder="Bijv. Via Roma 1, Ljubljana…"/></div>
+    <div class="fl"><label>Notities</label><textarea id="f-notes" placeholder="Tips, openingstijden, must-try…"></textarea></div>
+    <div class="m-btns">
+      <button class="m-cancel" onclick="closeModal()">Annuleer</button>
+      <button class="m-save" id="btn-save" onclick="addItem()">Toevoegen</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const STOPS = [
+  { id:"maastricht",  name:"Maastricht",      flag:"🇳🇱", dates:"16–17 jul",    emoji:"🏰", nights:1, campsite:"Camperplaats Papillon",   addr:"Bosscherweg 35, 6219 ND Maastricht",         coords:{lat:50.842,lon:5.716} },
+  { id:"munchen",     name:"München",         flag:"🇩🇪", dates:"17–18 jul",    emoji:"🍺", nights:1, campsite:"Campingplatz Thalkirchen", addr:"Zentralländstraße 49, 81379 München",        coords:{lat:48.098,lon:11.551} },
+  { id:"ljubljana",   name:"Ljubljana",       flag:"🇸🇮", dates:"18–21 jul",    emoji:"🐉", nights:3, campsite:"Ljubljana Resort",         addr:"Dunajska c. 270, 1000 Ljubljana",            coords:{lat:46.080,lon:14.506} },
+  { id:"istrie",      name:"Istrië – Floria", flag:"🇭🇷", dates:"21–27 jul",    emoji:"🌊", nights:6, campsite:"Floria Camping",           addr:"Gondolići 2a, HR-52220 Labin",               coords:{lat:45.097,lon:14.122} },
+  { id:"brda-saxida", name:"Brda – Saxida",   flag:"🇸🇮", dates:"27–28 jul",    emoji:"🍇", nights:1, campsite:"Kamp Saxida",              addr:"Zalošče 12a, 5294 Dornberk",                 coords:{lat:45.917,lon:13.717} },
+  { id:"brda-kamp",   name:"Brda – Kamp Brda",flag:"🇸🇮", dates:"28–29 jul",    emoji:"🍇", nights:1, campsite:"Kamp Brda",               addr:"Podsabotin 45, 5211 Kojsko",                 coords:{lat:45.962,lon:13.653} },
+  { id:"bovec",       name:"Bovec",           flag:"🇸🇮", dates:"29 jul–2 aug", emoji:"🏔️", nights:4, campsite:"Kamp Liza",               addr:"Vodenca 4, 5230 Bovec",                      coords:{lat:46.337,lon:13.551} },
+  { id:"zwartewoud",  name:"Zwarte Woud",     flag:"🇩🇪", dates:"2–5 aug",      emoji:"🌲", nights:3, campsite:"Campingplatz Murhof",     addr:"Murhof 1, 77883 Ottenhöfen",                 coords:{lat:48.533,lon:8.200} },
+  { id:"trier",       name:"Trier",           flag:"🇩🇪", dates:"5–7 aug",      emoji:"🏛️", nights:2, campsite:"Camping Treviris",        addr:"Luxemburgerstraße 81, 54294 Trier",           coords:{lat:49.746,lon:6.638} },
+  { id:"utrecht",     name:"Utrecht",         flag:"🇳🇱", dates:"7–8 aug",      emoji:"🚲", nights:1, campsite:"City Camping Utrecht",    addr:"Ariënslaan 5, 3573 PT Utrecht",               coords:{lat:52.080,lon:5.118} },
+];
+
+const CATS = [
+  { id:"restaurants", label:"Restaurants & cafés", icon:"🍽️", color:"#c8714a" },
+  { id:"markten",     label:"Marktjes",             icon:"🛒", color:"#d4a520" },
+  { id:"activiteiten",label:"Activiteiten",         icon:"🎯", color:"#2980b9" },
+  { id:"campings",    label:"Slaapplaatsen",        icon:"🏕️", color:"#2e7a5b" },
+];
+
+let data = {}, cur = null, curCat = "restaurants", mCat = "restaurants", editCamp = false;
+
+// ── Utilities ──────────────────────────────────────────
+function haversine(a,b,c,d){
+  const R=6371, dL=(c-a)*Math.PI/180, dO=(d-b)*Math.PI/180;
+  const x=Math.sin(dL/2)**2+Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin(dO/2)**2;
+  return (R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x))).toFixed(1);
+}
+
+async function geocode(q) {
+  try {
+    const r = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}&limit=1`, { headers:{"User-Agent":"CamperVacay2026"} });
+    const d = await r.json();
+    if (d[0]) return { lat: +d[0].lat, lon: +d[0].lon };
+  } catch(e) {}
+  return null;
+}
+
+function sd(id) {
+  if (!data[id]) data[id] = { addr:"", coords:null, naam:"", img:"", items:[] };
+  return data[id];
+}
+
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('on');
+  setTimeout(() => el.classList.remove('on'), 2400);
+}
+
+// ── Firebase sync ───────────────────────────────────────
+async function saveToFirebase() {
+  if (!window._fbSave) return;
+  try {
+    await window._fbSave(data);
+    document.getElementById('sync-dot').classList.add('live');
+    setTimeout(() => document.getElementById('sync-dot').classList.remove('live'), 1500);
+  } catch(e) { console.error('Save error:', e); }
+}
+
+function startListening() {
+  if (!window._fbListen) {
+    document.getElementById('setup-screen').style.display = 'flex';
+    document.getElementById('p-ov').style.display = 'none';
+    return;
+  }
+  window._fbListen((remoteData) => {
+    data = remoteData;
+    STOPS.forEach(s => { if (!data[s.id]) data[s.id] = { addr:s.addr, coords:s.coords, naam:s.campsite, img:"", items:[] }; });
+    renderOv();
+    if (cur) { renderCamp(); renderCats(); renderItems(); }
+  });
+}
+
+// ── Dropdowns ───────────────────────────────────────────
+function buildDropdowns() {
+  document.querySelectorAll('#nav-bar .nav-item').forEach(item => {
+    const ids = item.dataset.ids.split(',');
+    const dd = item.querySelector('.dropdown');
+    dd.innerHTML = '';
+    ids.forEach(id => {
+      const s = STOPS.find(s => s.id === id); if (!s) return;
+      const d = document.createElement('div'); d.className = 'dd-item';
+      d.innerHTML = `${s.emoji} ${s.name}`;
+      d.onclick = (e) => { e.stopPropagation(); openStop(s); item.classList.remove('open'); };
+      dd.appendChild(d);
+    });
+    item.querySelector('.nav-label').addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('#nav-bar .nav-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+  document.addEventListener('click', () => document.querySelectorAll('#nav-bar .nav-item').forEach(i => i.classList.remove('open')));
+}
+
+// ── Overview ─────────────────────────────────────────────
+function renderOv() {
+  const grid = document.getElementById('stop-grid');
+  grid.innerHTML = '';
+  STOPS.forEach(s => {
+    const d = sd(s.id);
+    const card = document.createElement('div'); card.className = 'scard';
+    const badge = d.items.length ? `<span class="sc-badge">${d.items.length} ideeën</span>` : `<span class="sc-badge e">Voeg toe</span>`;
+    const imgTag = d.img ? `<img src="${d.img}" loading="lazy" alt="${s.name}" onerror="this.style.display='none'"/>` : '';
+    card.innerHTML = `
+      <div class="sc-hero g-${s.id}">
+        ${imgTag}
+        <div class="sc-ov"></div>
+        <span class="sc-flag">${s.flag}</span>
+        <span class="sc-emoji">${s.emoji}</span>
+        <span class="sc-nights">${s.nights} nacht${s.nights>1?'en':''}</span>
+      </div>
+      <div class="sc-body">
+        <div class="sc-name">${s.name}</div>
+        <div class="sc-dates">${s.dates}</div>
+        <div class="sc-camp">${d.naam || s.campsite}</div>
+        ${badge}
+      </div>`;
+    card.onclick = () => openStop(s);
+    grid.appendChild(card);
+  });
+}
+
+// ── Detail ───────────────────────────────────────────────
+function openStop(s) {
+  cur = s; curCat = "restaurants"; editCamp = false;
+  document.getElementById('p-ov').classList.remove('on');
+  document.getElementById('p-det').classList.add('on');
+
+  const hero = document.getElementById('det-hero');
+  hero.className = `det-hero g-${s.id}`;
+  const oldImg = hero.querySelector('img');
+  if (oldImg) oldImg.remove();
+  const d = sd(s.id);
+  if (d.img) {
+    const img = document.createElement('img');
+    img.src = d.img; img.alt = s.name;
+    img.onerror = () => img.remove();
+    hero.prepend(img);
+  }
+
+  document.getElementById('d-emoji').textContent = s.emoji;
+  document.getElementById('d-name').textContent = s.flag + ' ' + s.name;
+  document.getElementById('d-dates').textContent = s.dates + ' · ' + s.nights + ' nacht' + (s.nights > 1 ? 'en' : '');
+  document.getElementById('d-camp').textContent = '🏕️ ' + (d.naam || s.campsite);
+
+  renderCamp(); renderCats(); renderItems();
+  window.scrollTo(0, 0);
+}
+
+function goBack() {
+  document.getElementById('p-det').classList.remove('on');
+  document.getElementById('p-ov').classList.add('on');
+  cur = null; renderOv();
+}
+
+// ── Camp card ────────────────────────────────────────────
+function renderCamp() {
+  const el = document.getElementById('camp-card');
+  const d = sd(cur.id);
+  if (!editCamp) {
+    el.innerHTML = `
+      <div class="cc-lbl">Slaapplaats</div>
+      <div class="cc-name">${d.naam || cur.campsite}</div>
+      <div class="cc-addr">${d.addr || '—'}</div>
+      ${d.coords ? '<div class="cc-geo">📡 Locatie bekend — afstanden worden berekend</div>' : ''}
+      <button class="cc-edit" onclick="toggleEdit(true)">✏️ Aanpassen</button>`;
+  } else {
+    el.innerHTML = `
+      <div class="cc-lbl">Aanpassen</div>
+      <div><label class="ei-lbl">Naam camping</label><input class="ei" id="ei-naam" value="${d.naam || cur.campsite}"/></div>
+      <div><label class="ei-lbl">Adres</label>
+        <div class="ei-row"><input class="ei" id="ei-addr" value="${d.addr || ''}"/><button class="ei-save" onclick="saveCamp()">Opslaan</button></div>
+      </div>
+      <div style="margin-top:8px">
+        <label class="ei-lbl">Foto-URL (Unsplash / Pexels / eigen link)</label>
+        <input class="ei" id="ei-img" value="${d.img || ''}" placeholder="https://images.unsplash.com/…"/>
+      </div>
+      <span class="ei-cancel" onclick="toggleEdit(false)">Annuleer</span>`;
+  }
+}
+function toggleEdit(v) { editCamp = v; renderCamp(); }
+
+async function saveCamp() {
+  const naam = document.getElementById('ei-naam')?.value.trim() || '';
+  const addr = document.getElementById('ei-addr')?.value.trim() || '';
+  const img  = document.getElementById('ei-img')?.value.trim()  || '';
+  const btn  = document.querySelector('.ei-save');
+  if (btn) { btn.textContent = '…'; btn.disabled = true; }
+
+  let coords = await geocode(addr);
+  if (!coords) coords = cur.coords;
+
+  const d = sd(cur.id);
+  d.naam = naam; d.addr = addr; d.coords = coords; d.img = img;
+  if (coords) d.items.forEach(i => { if (i.coords) i.dist = haversine(i.coords.lat, i.coords.lon, coords.lat, coords.lon); });
+
+  await saveToFirebase();
+  showToast('Opgeslagen ✓');
+  editCamp = false; renderCamp(); renderOv();
+
+  const hero = document.getElementById('det-hero');
+  const oldImg = hero.querySelector('img'); if (oldImg) oldImg.remove();
+  if (img) {
+    const im = document.createElement('img'); im.src = img; im.alt = cur.name;
+    im.onerror = () => im.remove(); hero.prepend(im);
+  }
+  document.getElementById('d-camp').textContent = '🏕️ ' + naam;
+}
+
+// ── Category tabs ────────────────────────────────────────
+function renderCats() {
+  const row = document.getElementById('cat-row'); row.innerHTML = '';
+  CATS.forEach(c => {
+    const n = sd(cur.id).items.filter(i => i.cat === c.id).length;
+    const t = document.createElement('button');
+    t.className = 'ctab' + (curCat === c.id ? ' on' : '');
+    t.innerHTML = `${c.icon} ${c.label}${n ? ` <span class="cn">${n}</span>` : ''}`;
+    t.onclick = () => { curCat = c.id; renderCats(); renderItems(); };
+    row.appendChild(t);
+  });
+}
+
+// ── Items ────────────────────────────────────────────────
+function renderItems() {
+  const list = document.getElementById('item-list');
+  const items = sd(cur.id).items.filter(i => i.cat === curCat);
+  const cat = CATS.find(c => c.id === curCat);
+  list.innerHTML = '';
+  if (!items.length) {
+    list.innerHTML = `<div class="empty-box"><span class="eb-ico">${cat.icon}</span><p class="eb-txt">Nog geen ${cat.label.toLowerCase()} toegevoegd.<br>Druk op de knop hieronder om te beginnen.</p></div>`;
+    return;
+  }
+  items.forEach(item => {
+    const card = document.createElement('div'); card.className = 'icard'; card.style.borderLeftColor = cat.color;
+    card.innerHTML = `
+      <div class="ic-top">
+        <div class="ic-name">${item.name}</div>
+        <button class="ic-del" onclick="delItem('${item.id}')">✕</button>
+      </div>
+      <div class="ic-meta">
+        ${item.addr ? `<span class="ic-addr">📍 ${item.addr}</span>` : ''}
+        ${item.dist ? `<span class="ic-dist">📏 ${item.dist} km</span>` : ''}
+      </div>
+      ${item.note ? `<div class="ic-note">${item.note}</div>` : ''}
+      <div class="ic-when">Toegevoegd ${item.when}</div>`;
+    list.appendChild(card);
+  });
+}
+
+// ── Modal ────────────────────────────────────────────────
+function openModal() {
+  mCat = curCat; renderMCats();
+  ['f-name','f-addr','f-notes'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('modal-bg').classList.add('on');
+  setTimeout(() => document.getElementById('f-name').focus(), 80);
+}
+function closeModal() { document.getElementById('modal-bg').classList.remove('on'); }
+function closeModalOutside(e) { if (e.target.id === 'modal-bg') closeModal(); }
+function renderMCats() {
+  const el = document.getElementById('mcats'); el.innerHTML = '';
+  CATS.forEach(c => {
+    const b = document.createElement('button'); b.className = 'mc' + (mCat === c.id ? ' on' : '');
+    b.textContent = c.icon + ' ' + c.label;
+    b.onclick = () => { mCat = c.id; renderMCats(); };
+    el.appendChild(b);
+  });
+}
+
+async function addItem() {
+  const name = document.getElementById('f-name').value.trim(); if (!name) return;
+  const addr = document.getElementById('f-addr').value.trim();
+  const note = document.getElementById('f-notes').value.trim();
+  const btn = document.getElementById('btn-save'); btn.disabled = true; btn.textContent = 'Even geduld…';
+
+  let coords = null, dist = null;
+  const d = sd(cur.id);
+  if (addr) {
+    coords = await geocode(addr);
+    if (coords && d.coords) dist = haversine(coords.lat, coords.lon, d.coords.lat, d.coords.lon);
+  }
+
+  d.items.push({ id: Date.now() + '', cat: mCat, name, addr, note, coords, dist, when: new Date().toLocaleDateString('nl-NL') });
+  await saveToFirebase();
+  showToast('Toegevoegd ✓');
+  btn.disabled = false; btn.textContent = 'Toevoegen';
+  closeModal(); curCat = mCat; renderCats(); renderItems();
+}
+
+async function delItem(id) {
+  if (!confirm('Dit idee verwijderen?')) return;
+  sd(cur.id).items = sd(cur.id).items.filter(i => i.id !== id);
+  await saveToFirebase();
+  renderCats(); renderItems();
+}
+
+// ── Init ─────────────────────────────────────────────────
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+buildDropdowns();
+
+// Wacht tot Firebase module geladen is, dan start luisteren
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    STOPS.forEach(s => { if (!data[s.id]) data[s.id] = { addr:s.addr, coords:s.coords, naam:s.campsite, img:"", items:[] }; });
+    startListening();
+    renderOv();
+  }, 800);
+});
+</script>
+</body>
+</html>
