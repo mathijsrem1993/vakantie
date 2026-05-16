@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Es &amp; Thijs Campervacay 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import{getDatabase,ref,set,get}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+const cfg={apiKey:"AIzaSyC3HWZI9fiVXlq5Bb7fd8rHBtSX_by80Co",authDomain:"camper-9d6e9.firebaseapp.com",databaseURL:"https://camper-9d6e9-default-rtdb.europe-west1.firebasedatabase.app",projectId:"camper-9d6e9",storageBucket:"camper-9d6e9.firebasestorage.app",messagingSenderId:"10688987504",appId:"1:10688987504:web:954e7d9c5ab2d310e28fb5"};
+const db=getDatabase(initializeApp(cfg));const R="campervacay2026";
+window._fbSave=async d=>set(ref(db,R),JSON.parse(JSON.stringify(d)));
+window._fbLoad=async()=>{const s=await get(ref(db,R));return s.exists()?s.val():null;};
+window._fbPoll=window._fbLoad;
+</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#BDC9B0;color:#1a1a1a;max-width:480px;margin:0 auto}
+.page{display:none}.page.on{display:block}
+.site-header{background:#254224;padding:13px 18px;position:sticky;top:0;z-index:200}
+.header-inner{display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Playfair Display',serif;font-size:15px;font-weight:900;color:#fff;cursor:pointer;line-height:1.2}
+.logo em{color:#f0c896;font-style:normal}
+.nav-bar{display:flex;gap:1px;position:relative;z-index:300}
+.nav-item{position:relative}
+.nav-label{font-size:11px;font-weight:500;color:rgba(255,255,255,.8);padding:6px 9px;border-radius:6px;cursor:pointer;white-space:nowrap;user-select:none}
+.nav-label:hover,.nav-item.open .nav-label{background:rgba(255,255,255,.15);color:#fff}
+.dropdown{display:none;position:fixed;top:52px;min-width:140px;background:#fff;border:1px solid #f0ede8;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.15);overflow:hidden;z-index:500}
+.nav-item.open .dropdown{display:block}
+.dd-item{padding:10px 14px;font-size:12px;cursor:pointer;color:#333;border-bottom:1px solid #faf8f5}
+.dd-item:last-child{border-bottom:none}
+.dd-item:hover{background:#fef8f4;color:#254224}
+.hero{position:relative;height:270px;overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,rgba(0,0,0,.1) 60%)}
+.hero-body{position:absolute;bottom:0;left:0;right:0;padding:24px 20px}
+.hero-row{display:flex;align-items:flex-end;justify-content:space-between;width:100%}
+.hero-eye{font-size:9.5px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:8px}
+.hero-title{font-family:'Playfair Display',serif;font-size:30px;font-weight:900;color:#fff;line-height:1.05;margin-bottom:5px}
+.hero-sub{font-size:12px;color:rgba(255,255,255,.7)}
+.countdown{text-align:center;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:10px 14px;flex-shrink:0;margin-left:12px}
+.cd-over,.cd-label{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.7);font-family:'Inter',sans-serif}
+.cd-over{margin-bottom:1px}.cd-label{margin-top:3px}
+.cd-number{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:#fff;line-height:1}
+.stops-section{padding:20px 16px 32px}
+.stop-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.scard{border-radius:14px;overflow:hidden;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.08);transition:transform .2s,box-shadow .2s}
+.scard:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.14)}
+.sc-hero{position:relative;height:110px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.sc-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,rgba(0,0,0,.02) 65%)}
+.sc-nights{position:absolute;bottom:6px;left:8px;font-size:8.5px;color:rgba(255,255,255,.9);z-index:2}
+.sc-body{padding:9px 10px 12px;background:#fff}
+.sc-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;line-height:1.2}
+.sc-dates{font-size:9.5px;color:#bbb;margin-top:1px}
+.sc-camp{font-size:9px;color:#7a9db5;margin-top:4px;line-height:1.3}
+.sc-travel{font-size:10px;color:#5a7a58;margin-top:4px;font-weight:500}
+.sc-badge{display:inline-block;margin-top:5px;font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;background:#fef0e8;color:#b85c30}
+.sc-badge.e{background:#f5f2ed;color:#bbb}
+.g-maastricht{background:linear-gradient(135deg,#4a1e6e,#8a4aad)}
+.g-munchen{background:linear-gradient(135deg,#0d3d6b,#2877b8)}
+.g-ljubljana{background:linear-gradient(135deg,#1a5c3a,#3a9e6a)}
+.g-istrie{background:linear-gradient(135deg,#0d5c7a,#1a9ec8)}
+.g-brda-saxida{background:linear-gradient(135deg,#5c3a7a,#9a6ab8)}
+.g-brda-kamp{background:linear-gradient(135deg,#6b1a3a,#b84a7a)}
+.g-bovec{background:linear-gradient(135deg,#1a4a5c,#2a7a9a)}
+.g-zwartewoud{background:linear-gradient(135deg,#1a3a1a,#3a6a3a)}
+.g-trier{background:linear-gradient(135deg,#5c2e1a,#a05a30)}
+.g-utrecht{background:linear-gradient(135deg,#1a3a6b,#2a6ab8)}
+.det-hero{position:relative;height:240px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.det-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.det-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.82) 0%,rgba(0,0,0,.2) 60%);z-index:2}
+.det-body{position:absolute;bottom:0;left:0;right:0;padding:20px 18px;z-index:4}
+.back-btn{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.24);color:#fff;padding:6px 12px;border-radius:20px;cursor:pointer;font-size:11px;font-family:'Inter',sans-serif;margin-bottom:10px}
+.back-btn:hover{background:rgba(255,255,255,.3)}
+.det-name{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:#fff;line-height:1.1}
+.det-sub{font-size:11px;color:rgba(255,255,255,.68);margin-top:3px}
+.det-camp{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.17);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:4px 11px;font-size:10px;color:#fff;margin-top:8px}
+.camp-card{margin:16px;background:#f9f7f3;border-radius:14px;padding:15px;border:1px solid #ede9e2}
+.cc-lbl{font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:#bbb;font-weight:600;margin-bottom:9px}
+.cc-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:700}
+.cc-addr{font-size:12px;color:#7a9db5;margin-top:3px;line-height:1.6}
+.cc-geo{display:inline-flex;align-items:center;gap:4px;background:#edf5f0;color:#2e7a5b;font-size:10px;padding:3px 9px;border-radius:8px;margin-top:7px}
+.cc-edit{background:none;border:1px solid #e8e4de;border-radius:8px;padding:5px 12px;font-size:11px;color:#999;cursor:pointer;font-family:'Inter',sans-serif;margin-top:9px;display:inline-block}
+.ei-lbl{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#bbb;display:block;margin-bottom:4px;font-weight:600}
+.ei{width:100%;border:1.5px solid #e8e4de;border-radius:10px;padding:9px 12px;font-size:13px;font-family:'Inter',sans-serif;background:#fff;outline:none;color:#1a1a1a;margin-bottom:8px}
+.ei:focus{border-color:#254224}
+.ei-row{display:flex;gap:8px;align-items:center}
+.ei-row .ei{margin-bottom:0;flex:1}
+.ei-save{background:#1a1a1a;color:#fff;border:none;border-radius:10px;padding:9px 16px;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif}
+.ei-cancel{font-size:11px;color:#bbb;cursor:pointer;margin-top:8px;display:inline-block}
+.cat-sec{padding:0 16px;margin-top:16px}
+.cat-scroll{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.cat-scroll::-webkit-scrollbar{display:none}
+.ctab{display:flex;align-items:center;gap:4px;padding:8px 14px;border-radius:25px;border:1.5px solid #ede9e2;background:#fff;cursor:pointer;white-space:nowrap;font-size:11.5px;font-weight:500;font-family:'Inter',sans-serif;transition:all .15s;color:#666}
+.ctab.on{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.cn{background:#c8714a;color:#fff;border-radius:10px;padding:1px 6px;font-size:9px;margin-left:1px}
+.items-sec{padding:14px 16px 18px}
+.icard{background:#fff;border-radius:13px;padding:15px;margin-bottom:9px;border:1px solid #f0ede8;border-left:3px solid;box-shadow:0 1px 5px rgba(0,0,0,.05)}
+.icard.done-card{opacity:.6}
+.icard.done-card .ic-name{text-decoration:line-through;color:#aaa}
+.ic-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.ic-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;line-height:1.2;flex:1}
+.ic-del,.ic-edit,.ic-star,.ic-move{background:none;border:none;cursor:pointer;font-size:12px;padding:2px 4px;flex-shrink:0}
+.ic-del{color:#ddd}.ic-del:hover{color:#c0392b}
+.ic-edit{color:#bbb}.ic-edit:hover{color:#254224}
+.ic-star{font-size:14px}.ic-move{color:#bbb;line-height:1}
+.ic-move:disabled{color:#eee;cursor:default}
+.ic-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;align-items:center}
+.ic-addr{font-size:11px;color:#bbb}
+.ic-dist{background:#edf5f0;color:#2e6e4e;font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:8px}
+.ic-link{margin-top:8px}
+.ic-link a{font-size:12px;color:#254224;font-weight:600;text-decoration:none;border-bottom:1px solid #254224;padding-bottom:1px}
+.ic-link a:hover{color:#c8714a;border-color:#c8714a}
+.ic-note{font-size:12px;color:#666;margin-top:7px;font-style:italic;line-height:1.6;padding-left:10px;border-left:2px solid #f0ede8}
+.ic-done{display:inline-flex;align-items:center;gap:5px;margin-top:8px;background:none;border:1px solid #e0dbd3;border-radius:20px;padding:4px 10px;font-size:11px;color:#888;cursor:pointer;font-family:'Inter',sans-serif}
+.ic-done.done{background:#edf5f0;border-color:#2e7a5b;color:#2e7a5b;font-weight:600}
+.ic-when{font-size:10px;color:#ddd;margin-top:6px}
+.empty-box{text-align:center;padding:36px 20px}
+.eb-ico{font-size:28px;display:block;margin-bottom:9px}
+.eb-txt{font-size:12px;color:#bbb;line-height:1.7}
+.add-wrap{padding:0 16px 24px}
+.add-btn{width:100%;background:#c8714a;color:#fff;border:none;border-radius:13px;padding:15px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:600;display:none;align-items:flex-end;justify-content:center}
+.modal-bg.on{display:flex}
+.modal{background:#fff;border-radius:20px 20px 0 0;padding:24px 20px 40px;width:100%;max-width:480px}
+.m-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:16px}
+.m-cats{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+.mc{padding:6px 12px;border-radius:20px;border:1.5px solid #ede9e2;font-size:11px;cursor:pointer;font-family:'Inter',sans-serif;color:#666}
+.mc.on{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.fl{margin-bottom:12px}
+.fl label{font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:#bbb;display:block;margin-bottom:4px;font-weight:600}
+.fl input,.fl textarea{width:100%;border:1.5px solid #e8e4de;border-radius:10px;padding:10px 12px;font-size:13px;font-family:'Inter',sans-serif;background:#fafaf8;outline:none;color:#1a1a1a}
+.fl input:focus,.fl textarea:focus{border-color:#254224;background:#fff}
+.fl textarea{resize:vertical;min-height:56px}
+.m-btns{display:flex;gap:10px;margin-top:6px}
+.m-save{flex:1;background:#1a1a1a;color:#fff;border:none;border-radius:12px;padding:13px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
+.m-save:disabled{opacity:.45}
+.m-cancel{background:none;border:1.5px solid #e8e4de;color:#999;border-radius:12px;padding:13px 15px;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;font-size:12px;padding:10px 20px;border-radius:25px;z-index:700;opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap;font-weight:500}
+.toast.on{opacity:1}
+.sync-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3);margin-left:6px;vertical-align:middle;transition:background .3s}
+.sync-dot.live{background:#7ec88a}
+</style>
+</head>
+<body>
+<div class="page on" id="p-ov">
+  <div class="site-header"><div class="header-inner">
+    <div class="logo" onclick="goBack()"><em>Es</em> &amp; Thijs <span class="sync-dot" id="sync-dot"></span></div>
+    <nav class="nav-bar" id="nav-bar">
+      <div class="nav-item" data-ids="maastricht,utrecht"><div class="nav-label">Nederland &#9662;</div><div class="dropdown"></div></div>
+      <div class="nav-item" data-ids="munchen,zwartewoud,trier"><div class="nav-label">Duitsland &#9662;</div><div class="dropdown"></div></div>
+      <div class="nav-item" data-ids="ljubljana,brda-saxida,brda-kamp,bovec"><div class="nav-label">Sloveni&#235; &#9662;</div><div class="dropdown"></div></div>
+      <div class="nav-item" data-ids="istrie"><div class="nav-label">Kroati&#235; &#9662;</div><div class="dropdown"></div></div>
+    </nav>
+  </div></div>
+  <div class="hero">
+    <img src="https://images.unsplash.com/photo-1533591380348-14193f1de18f?w=900&q=80" alt="Camper vakantie" loading="lazy"></div>
+    <div class="hero-body"><div class="hero-row">
+      <div>
+        <div class="hero-eye">Zomer 2026 &middot; 23 dagen</div>
+        <div class="hero-title">Es &amp; Thijs<br/>Campervacay</div>
+        <div class="hero-sub">10 bestemmingen &middot; 4 landen</div>
+      </div>
+      <div class="countdown">
+        <div class="cd-over">over</div>
+        <div class="cd-number" id="cd-days">--</div>
+        <div class="cd-label">dagen</div>
+      </div>
+    </div></div>
+  </div>
+  <div class="stops-section"><div class="stop-grid" id="stop-grid"></div></div>
+</div>
+<div class="page" id="p-det">
+  <div class="site-header"><div class="header-inner">
+    <div class="logo" onclick="goBack()"><em>Es</em> &amp; Thijs</div>
+    <nav class="nav-bar" id="nav-bar-det">
+      <div class="nav-item" data-ids="maastricht,utrecht"><div class="nav-label">Nederland &#9662;</div><div class="dropdown"></div></div>
+      <div class="nav-item" data-ids="munchen,zwartewoud,trier"><div class="nav-label">Duitsland &#9662;</div><div class="dropdown"></div></div>
+      <div class="nav-item" data-ids="ljubljana,brda-saxida,brda-kamp,bovec"><div class="nav-label">Sloveni&#235; &#9662;</div><div class="dropdown"></div></div>
+      <div class="nav-item" data-ids="istrie"><div class="nav-label">Kroati&#235; &#9662;</div><div class="dropdown"></div></div>
+    </nav>
+  </div></div>
+  <div class="det-hero" id="det-hero">
+    <div class="det-ov"></div>
+    <div class="det-body">
+      <button class="back-btn" onclick="goBack()">&#8592; Terug</button>
+      <div class="det-name" id="d-name"></div>
+      <div class="det-sub" id="d-dates"></div>
+      <div class="det-camp" id="d-camp"></div>
+    </div>
+  </div>
+  <div class="camp-card" id="camp-card"></div>
+  <div class="cat-sec"><div class="cat-scroll" id="cat-row"></div></div>
+  <div class="items-sec" id="item-list"></div>
+  <div class="add-wrap"><button class="add-btn" onclick="openModal()">+ Idee toevoegen</button></div>
+</div>
+<div class="modal-bg" id="modal-bg" onclick="closeModalOut(event)">
+  <div class="modal">
+    <div class="m-title" id="m-title">Nieuw idee &#10024;</div>
+    <div class="m-cats" id="mcats"></div>
+    <div class="fl"><label>Naam *</label><input id="f-name" placeholder="Bijv. Trattoria al Ponte&#8230;"/></div>
+    <div class="fl"><label>Adres (voor afstand)</label><input id="f-addr" placeholder="Bijv. Via Roma 1&#8230;"/></div>
+    <div class="fl"><label>Link</label><input id="f-link" placeholder="https://&#8230;"/></div>
+    <div class="fl"><label>Notities</label><textarea id="f-notes" placeholder="Tips, openingstijden&#8230;"></textarea></div>
+    <div class="m-btns">
+      <button class="m-cancel" onclick="closeModal()">Annuleer</button>
+      <button class="m-save" id="btn-save" onclick="addItem()">Toevoegen</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+var STOPS=[
+  {id:"maastricht",name:"Maastricht",dates:"16\u201317 jul",nights:1,campsite:"Camperplaats Papillon",addr:"Bosscherweg 35, 6219 ND Maastricht",coords:{lat:50.842,lon:5.716}},
+  {id:"munchen",name:"M\u00FCnchen",dates:"17\u201318 jul",nights:1,campsite:"Campingplatz Thalkirchen",addr:"Zentrall\u00e4ndstra\u00dfe 49, 81379 M\u00FCnchen",coords:{lat:48.098,lon:11.551}},
+  {id:"ljubljana",name:"Ljubljana",dates:"18\u201321 jul",nights:3,campsite:"Ljubljana Resort",addr:"Dunajska c. 270, 1000 Ljubljana",coords:{lat:46.080,lon:14.506}},
+  {id:"istrie",name:"Istri\u00eb",dates:"21\u201327 jul",nights:6,campsite:"Floria Camping",addr:"Gondoli\u010di 2a, HR-52220 Labin",coords:{lat:45.097,lon:14.122}},
+  {id:"brda-saxida",name:"Brda \u2013 Saxida",dates:"27\u201328 jul",nights:1,campsite:"Kamp Saxida",addr:"Zalo\u0161\u010de 12a, 5294 Dornberk",coords:{lat:45.917,lon:13.717}},
+  {id:"brda-kamp",name:"Brda \u2013 Kamp Brda",dates:"28\u201329 jul",nights:1,campsite:"Kamp Brda",addr:"Podsabotin 45, 5211 Kojsko",coords:{lat:45.962,lon:13.653}},
+  {id:"bovec",name:"Bovec",dates:"29 jul\u20132 aug",nights:4,campsite:"Kamp Liza",addr:"Vodenca 4, 5230 Bovec",coords:{lat:46.337,lon:13.551}},
+  {id:"zwartewoud",name:"Zwarte Woud \u2013 Eetclub",dates:"2\u20135 aug",nights:3,campsite:"Campingplatz Murhof",addr:"Murhof 1, 77883 Ottenh\u00f6fen",coords:{lat:48.533,lon:8.200}},
+  {id:"trier",name:"Trier",dates:"5\u20137 aug",nights:2,campsite:"Camping Treviris",addr:"Luxemburgerstra\u00dfe 81, 54294 Trier",coords:{lat:49.746,lon:6.638}},
+  {id:"utrecht",name:"Utrecht",dates:"7\u20138 aug",nights:1,campsite:"City Camping Utrecht",addr:"Ari\u00ebnslaan 5, 3573 PT Utrecht",coords:{lat:52.080,lon:5.118}}
+];
+var REISTIJD={"maastricht":{km:"210 km",time:"2:15"},"munchen":{km:"649 km",time:"6:19"},"ljubljana":{km:"425 km",time:"4:32"},"istrie":{km:"164 km",time:"2:21"},"brda-saxida":{km:"146 km",time:"2:09"},"brda-kamp":{km:"21 km",time:"0:24"},"bovec":{km:"75 km",time:"1:19"},"zwartewoud":{km:"713 km",time:"8:23"},"trier":{km:"240 km",time:"2:55"},"utrecht":{km:"349 km",time:"3:52"}};
+var CATS=[
+  {id:"restaurants",label:"Horeca",icon:"🍽️",color:"#c8714a"},
+  {id:"activiteiten",label:"To do",icon:"📋",color:"#2980b9"},
+  {id:"markten",label:"Actief",icon:"🏃",color:"#d4a520"}
+];
+var data={},cur=null,curCat="restaurants",mCat="restaurants",editCamp=false,editingItemId=null,_t0=0;
+
+function hav(a,b,c,d){var R=6371,dL=(c-a)*Math.PI/180,dO=(d-b)*Math.PI/180,x=Math.sin(dL/2)*Math.sin(dL/2)+Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin(dO/2)*Math.sin(dO/2);return(R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x))).toFixed(1);}
+async function geo(q){try{var r=await fetch("https://nominatim.openstreetmap.org/search?format=json&q="+encodeURIComponent(q)+"&limit=1",{headers:{"User-Agent":"CamperApp2026"}});var d=await r.json();if(d[0])return{lat:+d[0].lat,lon:+d[0].lon};}catch(e){}return null;}
+function sd(id){if(!data[id])data[id]={};var d=data[id];if(!Array.isArray(d.items))d.items=[];if(!d.addr)d.addr="";if(!d.naam)d.naam="";if(d.img===undefined)d.img="";if(!d.coords)d.coords=null;return d;}
+function toArr(v){if(!v)return[];if(Array.isArray(v))return v;if(typeof v==="object")return Object.values(v);return[];}
+function toast(m){var el=document.getElementById("toast");el.textContent=m;el.classList.add("on");setTimeout(function(){el.classList.remove("on");},2400);}
+async function save(){if(!window._fbSave)return;try{await window._fbSave(data);_t0=Date.now();var dot=document.getElementById("sync-dot");if(dot){dot.classList.add("live");setTimeout(function(){dot.classList.remove("live");},1500);};}catch(e){toast("Opslaan mislukt");}}
+function norm(rd){var d=rd||{};STOPS.forEach(function(s){if(!d[s.id])d[s.id]={};var x=d[s.id];x.items=toArr(x.items);if(!x.addr)x.addr=s.addr;if(!x.naam)x.naam=s.campsite;if(!x.coords)x.coords=s.coords;if(x.img===undefined)x.img="";});return d;}
+async function startListening(){if(!window._fbLoad)return;var rd=await window._fbLoad();if(rd)data=norm(rd);renderOv();if(cur){renderCamp();renderCats();renderItems();}setInterval(async function(){if(Date.now()-_t0<5000)return;var r=await window._fbPoll();if(r){data=norm(r);renderOv();if(cur){renderCamp();renderCats();renderItems();}}},30000);}
+
+function buildDropdowns(){
+  var all=function(){return document.querySelectorAll("#nav-bar .nav-item,#nav-bar-det .nav-item");};
+  all().forEach(function(item){
+    var dd=item.querySelector(".dropdown");dd.innerHTML="";
+    item.dataset.ids.split(",").forEach(function(id){var s=STOPS.find(function(x){return x.id===id;});if(!s)return;var d=document.createElement("div");d.className="dd-item";d.textContent=s.name;d.onclick=function(e){e.stopPropagation();all().forEach(function(i){i.classList.remove("open");});openStop(s);};dd.appendChild(d);});
+    item.querySelector(".nav-label").addEventListener("click",function(e){e.stopPropagation();var op=item.classList.contains("open");all().forEach(function(i){i.classList.remove("open");});if(!op){item.classList.add("open");var ddEl=item.querySelector(".dropdown");var bw=document.body.getBoundingClientRect().width;var left=item.getBoundingClientRect().left;if(left+160>bw)left=bw-164;ddEl.style.left=Math.max(4,left)+"px";}});
+  });
+  document.addEventListener("click",function(){all().forEach(function(i){i.classList.remove("open");});});
+}
+
+function renderOv(){
+  var grid=document.getElementById("stop-grid");grid.innerHTML="";
+  STOPS.forEach(function(s){
+    var d=sd(s.id);
+    var card=document.createElement("div");card.className="scard";
+    var hero=document.createElement("div");hero.className="sc-hero g-"+s.id;
+    if(d.img){var im=document.createElement("img");im.src=d.img;im.loading="lazy";im.alt=s.name;im.onerror=function(){this.style.display="none";};hero.appendChild(im);}
+    var ov=document.createElement("div");ov.className="sc-ov";hero.appendChild(ov);
+    var ni=document.createElement("span");ni.className="sc-nights";ni.textContent=s.nights+" nacht"+(s.nights>1?"en":"");hero.appendChild(ni);
+    card.appendChild(hero);
+    var body=document.createElement("div");body.className="sc-body";
+    var rt=REISTIJD[s.id];body.innerHTML="<div class=\"sc-name\">"+s.name+"</div><div class=\"sc-dates\">"+s.dates+"</div>"+(rt?"<div class=\"sc-travel\">→ "+rt.km+" · "+rt.time+"</div>":"")+(d.items.length?"<span class=\"sc-badge\">"+d.items.length+" idee\u00EBn</span>":"<span class=\"sc-badge e\">Voeg toe</span>");
+    card.appendChild(body);card.onclick=function(){openStop(s);};grid.appendChild(card);
+  });
+}
+
+function openStop(s){
+  cur=s;curCat="restaurants";editCamp=false;
+  document.getElementById("p-ov").classList.remove("on");document.getElementById("p-det").classList.add("on");
+  var hero=document.getElementById("det-hero");hero.className="det-hero g-"+s.id;
+  var old=hero.querySelector("img");if(old)old.remove();
+  var d=sd(s.id);
+  if(d.img){var im=document.createElement("img");im.src=d.img;im.onerror=function(){im.remove();};hero.prepend(im);}
+  document.getElementById("d-name").textContent=s.name;
+  document.getElementById("d-dates").textContent=s.dates+" \u00B7 "+s.nights+" nacht"+(s.nights>1?"en":"");
+  document.getElementById("d-camp").textContent=(d.naam||s.campsite);
+  renderCamp();renderCats();renderItems();window.scrollTo(0,0);
+}
+function goBack(){document.getElementById("p-det").classList.remove("on");document.getElementById("p-ov").classList.add("on");cur=null;renderOv();}
+
+function renderCamp(){
+  var el=document.getElementById("camp-card");var d=sd(cur.id);
+  if(!editCamp){el.innerHTML="<div class=\"cc-lbl\">Slaapplaats</div><div class=\"cc-name\">"+(d.naam||cur.campsite)+"</div><div class=\"cc-addr\">"+(d.addr||"\u2014")+"</div>"+(d.coords?"<div class=\"cc-geo\">Locatie bekend \u2014 afstanden worden berekend</div>":"")+"<button class=\"cc-edit\" onclick=\"toggleEdit(true)\">\u270F\uFE0F Aanpassen</button>";}
+  else{el.innerHTML="<div class=\"cc-lbl\">Aanpassen</div><div><label class=\"ei-lbl\">Naam camping</label><input class=\"ei\" id=\"ei-naam\" value=\""+(d.naam||cur.campsite)+"\"/></div><div><label class=\"ei-lbl\">Adres</label><div class=\"ei-row\"><input class=\"ei\" id=\"ei-addr\" value=\""+(d.addr||"")+"\"/><button class=\"ei-save\" onclick=\"saveCamp()\">Opslaan</button></div></div><div style=\"margin-top:8px\"><label class=\"ei-lbl\">Foto-URL</label><input class=\"ei\" id=\"ei-img\" value=\""+(d.img||"")+"\"/></div><span class=\"ei-cancel\" onclick=\"toggleEdit(false)\">Annuleer</span>";}
+}
+function toggleEdit(v){editCamp=v;renderCamp();}
+async function saveCamp(){
+  var naam=(document.getElementById("ei-naam")||{}).value||"";
+  var addr=(document.getElementById("ei-addr")||{}).value||"";
+  var img=(document.getElementById("ei-img")||{}).value||"";
+  var c=await geo(addr.trim());if(!c)c=cur.coords;
+  var d=sd(cur.id);d.naam=naam.trim();d.addr=addr.trim();d.coords=c;d.img=img.trim();
+  if(c)d.items.forEach(function(i){if(i.coords)i.dist=hav(i.coords.lat,i.coords.lon,c.lat,c.lon);});
+  await save();toast("Opgeslagen \u2713");editCamp=false;renderCamp();renderOv();
+  var hero=document.getElementById("det-hero");var old=hero.querySelector("img");if(old)old.remove();
+  if(img.trim()){var im=document.createElement("img");im.src=img.trim();im.onerror=function(){im.remove();};hero.prepend(im);}
+  document.getElementById("d-camp").textContent=naam.trim()||cur.campsite;
+}
+
+function renderCats(){
+  var row=document.getElementById("cat-row");row.innerHTML="";
+  CATS.forEach(function(c){var n=sd(cur.id).items.filter(function(i){return i.cat===c.id;}).length;var t=document.createElement("button");t.className="ctab"+(curCat===c.id?" on":"");t.innerHTML=c.icon+" "+c.label+(n?" <span class=\"cn\">"+n+"</span>":"");t.onclick=function(){curCat=c.id;renderCats();renderItems();};row.appendChild(t);});
+}
+function renderItems(){
+  var list=document.getElementById("item-list");var d=sd(cur.id);var cat=CATS.find(function(c){return c.id===curCat;});
+  var items=d.items.filter(function(i){return i.cat===curCat;});
+  items.sort(function(a,b){if(a.fav&&!b.fav)return -1;if(!a.fav&&b.fav)return 1;if(a.done&&!b.done)return 1;if(!a.done&&b.done)return -1;return 0;});
+  list.innerHTML="";
+  if(!items.length){list.innerHTML="<div class=\"empty-box\"><span class=\"eb-ico\">"+cat.icon+"</span><p class=\"eb-txt\">Nog geen "+cat.label.toLowerCase()+" toegevoegd.</p></div>";return;}
+  items.forEach(function(item,idx){
+    var card=document.createElement("div");card.className="icard"+(item.fav?" fav-card":"")+(item.done?" done-card":"");card.style.borderLeftColor=cat.color;
+    var canUp=idx>0&&!items[idx-1].fav&&!item.done;var canDown=idx<items.length-1&&!items[idx+1].done&&!item.fav;
+    card.innerHTML="<div class=\"ic-top\"><div class=\"ic-name\">"+item.name+"</div><div style=\"display:flex;gap:2px;flex-shrink:0;align-items:center\">"
+      +"<button class=\"ic-star\" onclick=\"toggleFav('"+item.id+"')\">"+(item.fav?"⭐":"☆")+"</button>"
+      +"<button class=\"ic-move\" onclick=\"moveItem('"+item.id+"',-1)\""+(canUp?"":" disabled")+">&uarr;</button>"
+      +"<button class=\"ic-move\" onclick=\"moveItem('"+item.id+"',1)\""+(canDown?"":" disabled")+">&darr;</button>"
+      +"<button class=\"ic-edit\" onclick=\"editItem('"+item.id+"')\">\u270F\uFE0F</button>"
+      +"<button class=\"ic-del\" onclick=\"delItem('"+item.id+"')\">&#x2715;</button>"
+      +"</div></div>"
+      +"<div class=\"ic-meta\">"+(item.addr?"<span class=\"ic-addr\">"+item.addr+"</span>":"")+(item.dist?"<span class=\"ic-dist\">"+item.dist+" km</span>":"")+"</div>"
+      +(item.link?"<div class=\"ic-link\"><a href=\""+item.link+"\" target=\"_blank\" rel=\"noopener\">Bekijk website &rarr;</a></div>":"")
+      +(item.note?"<div class=\"ic-note\">"+item.note+"</div>":"")
+      +"<button class=\"ic-done"+(item.done?" done":"")+\"" onclick=\"toggleDone('"+item.id+"')\">"+(item.done?"\u21A9 Toch niet gedaan":"\u25CB Markeer als gedaan")+"</button>"
+      +"<div class=\"ic-when\">Toegevoegd "+item.when+"</div>";
+    list.appendChild(card);
+  });
+}
+async function toggleFav(id){var d=sd(cur.id);var i=d.items.find(function(x){return x.id===id;});if(i){i.fav=!i.fav;await save();renderItems();}}
+async function toggleDone(id){var d=sd(cur.id);var i=d.items.find(function(x){return x.id===id;});if(i){i.done=!i.done;await save();renderItems();}}
+async function moveItem(id,dir){var d=sd(cur.id);var cids=d.items.filter(function(i){return i.cat===curCat;}).map(function(i){return i.id;});var ci=cids.indexOf(id);var ni=ci+dir;if(ni<0||ni>=cids.length)return;var si=d.items.findIndex(function(i){return i.id===id;});var ti=d.items.findIndex(function(i){return i.id===cids[ni];});if(si>-1&&ti>-1){var tmp=d.items[si];d.items[si]=d.items[ti];d.items[ti]=tmp;await save();renderItems();}}
+async function delItem(id){if(!confirm("Verwijderen?"))return;sd(cur.id).items=sd(cur.id).items.filter(function(i){return i.id!==id;});await save();renderCats();renderItems();}
+function openModal(){editingItemId=null;mCat=curCat;renderMCats();["f-name","f-addr","f-link","f-notes"].forEach(function(id){document.getElementById(id).value="";});document.getElementById("m-title").textContent="Nieuw idee \u2728";document.getElementById("btn-save").textContent="Toevoegen";document.getElementById("modal-bg").classList.add("on");setTimeout(function(){document.getElementById("f-name").focus();},80);}
+function editItem(id){var d=sd(cur.id);var item=d.items.find(function(i){return i.id===id;});if(!item)return;editingItemId=id;mCat=item.cat;renderMCats();document.getElementById("f-name").value=item.name||"";document.getElementById("f-addr").value=item.addr||"";document.getElementById("f-link").value=item.link||"";document.getElementById("f-notes").value=item.note||"";document.getElementById("m-title").textContent="Idee bewerken \u270F\uFE0F";document.getElementById("btn-save").textContent="Opslaan";document.getElementById("modal-bg").classList.add("on");setTimeout(function(){document.getElementById("f-name").focus();},80);}
+function closeModal(){document.getElementById("modal-bg").classList.remove("on");}
+function closeModalOut(e){if(e.target.id==="modal-bg")closeModal();}
+function renderMCats(){var el=document.getElementById("mcats");el.innerHTML="";CATS.forEach(function(c){var b=document.createElement("button");b.className="mc"+(mCat===c.id?" on":"");b.textContent=c.icon+" "+c.label;b.onclick=function(){mCat=c.id;renderMCats();};el.appendChild(b);});}
+async function addItem(){
+  var name=document.getElementById("f-name").value.trim();if(!name)return;
+  var addr=document.getElementById("f-addr").value.trim();var link=document.getElementById("f-link").value.trim();var note=document.getElementById("f-notes").value.trim();
+  var btn=document.getElementById("btn-save");btn.disabled=true;btn.textContent="Even geduld\u2026";
+  _t0=Date.now()-4000;
+  var coords=addr?await geo(addr):null;var d=sd(cur.id);
+  var dist=coords&&d.coords?hav(coords.lat,coords.lon,d.coords.lat,d.coords.lon):null;
+  if(editingItemId){var idx=d.items.findIndex(function(i){return i.id===editingItemId;});if(idx>-1){var ex=d.items[idx];d.items[idx]=Object.assign({},ex,{cat:mCat,name:name,addr:addr,link:link,note:note,coords:coords||ex.coords,dist:dist||ex.dist});};toast("Opgeslagen \u2713");}
+  else{d.items.push({id:Date.now()+"",cat:mCat,name:name,addr:addr,link:link,note:note,coords:coords,dist:dist,when:new Date().toLocaleDateString("nl-NL")});toast("Toegevoegd \u2713");}
+  await save();btn.disabled=false;btn.textContent="Toevoegen";closeModal();curCat=mCat;renderCats();renderItems();
+}
+function updateCountdown(){var el=document.getElementById("cd-days");if(!el)return;var diff=new Date("2026-07-16T00:00:00")-new Date();if(diff<=0){el.textContent="🚐";document.querySelector(".cd-label").textContent="onderweg!";}else{el.textContent=Math.ceil(diff/864e5);}}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal();});
+STOPS.forEach(function(s){if(!data[s.id])data[s.id]={addr:s.addr,coords:s.coords,naam:s.campsite,img:"",items:[]};}); 
+buildDropdowns();renderOv();updateCountdown();setInterval(updateCountdown,60000);
+function tryFB(n){if(window._fbLoad)startListening();else if(n>0)setTimeout(function(){tryFB(n-1);},300);}
+setTimeout(function(){tryFB(15);},300);
+</script>
+</body>
+</html>
